@@ -14,13 +14,13 @@ ssh $2 'mkdir -p ~/git/'$1'.git && cd ~/git/'$1'.git && git --bare init'
 mkdir $1
 cd $1
 git init
-git remote add $1 ssh://$2/~/git/$1.git
+git remote add dream ssh://$2/~/git/$1.git
 touch .gitignore
 git add .
 git commit -m 'Created new repo'
-git push $1 master
+git push dream master
 echo "
 [branch \"master\"]
-remote = $1
+remote =dream
 merge = refs/heads/master" >>.git/config
 echo "Your new git repo '$1' is ready and initialized at $2/~/git/$1.git" 
