@@ -1,0 +1,14 @@
+#!/bin/bash
+
+appname=$1
+case $2 in
+	"local")
+		template="/usr/psampaio/projects/rails-templates/template.rb";;
+	"mac")
+		template="/Users/Pedro/Projects/rails-templates/template.rb";;
+	*)
+		template="http://github.com/psampaio/rails-templates/raw/master/template.rb";;
+esac
+shift 2
+rails $appname -m $template $@
+
