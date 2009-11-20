@@ -1,0 +1,87 @@
+# conky configuration
+#
+# The list of variables has been removed from this file in favour
+# of keeping the documentation more maintainable.
+# Check http://conky.sf.net for an up-to-date-list.
+#
+# For ideas about how to modify conky, please see:
+# http://crunchbanglinux.org/forums/topic/59/my-conky-config/
+#
+# For help with conky, please see:
+# http://crunchbanglinux.org/forums/topic/2047/conky-help/
+#
+# Enjoy! :)
+##############################################
+#  Settings
+##############################################
+background yes
+use_xft yes
+xftfont Mono:size=9
+xftalpha 1
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 200 200
+maximum_width 240
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_color white
+default_shade_color black
+default_outline_color white
+alignment top_right
+gap_x 12
+gap_y 12
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale no
+
+##############################################
+#  Output
+##############################################
+TEXT
+
+
+${font sans:bold:size=11}${color #3B83B5}SYSTEM INFO ${color white}${hr}${font}
+Kernel: ${alignr}${kernel}
+Host: ${alignr}${nodename}
+Uptime: ${alignr}${uptime}
+CPU: ${alignr}${cpu cpu1}% ${alignr}${cpubar cpu1 8,60}
+Battery: ${alignr}${battery_percent BAT0}% ${alignr}${battery_bar 8,60 BAT0}
+
+${font sans:bold:size=11}${color #3B83B5}TOP PROCESSES ${color white}${hr}${font}
+${top_mem name 1}${alignr}${top mem 1}%
+${top_mem name 2}${alignr}${top mem 2}%
+${top_mem name 3}${alignr}${top mem 3}%
+${top_mem name 4}${alignr}${top mem 4}%
+${top_mem name 5}${alignr}${top mem 5}%
+
+${font sans:bold:size=11}${color #3B83B5}AVAILABLE SPACE ${color white}${hr}${font}
+RAM $alignc $mem/$memmax $alignr $memperc%
+$membar
+/ $alignc ${fs_used /} / ${fs_size /} $alignr ${fs_used_perc /}%
+${fs_bar /}
+/SWAP $alignc ${swap} / ${swapmax} $alignr ${swapperc}%
+${swapbar}
+
+${font sans:bold:size=11}${color #3B83B5}NETWORK ${color white}${hr} ${font}
+External IP:$alignr${execi 300 wget www.whatismyip.com/automation/n09230945.asp -O - -q}
+
+${if_existing /proc/net/route wlan0}${font sans:bold}Wireless${font}
+IP address: $alignr ${addr wlan0}
+ESSID: $alignr ${wireless_essid wlan0}
+Connection quality: $alignr ${wireless_link_qual_perc wlan0}%
+Up: ${upspeed wlan0} kb/s ${alignr}${upspeedgraph wlan0 8,60 789E2D A7CC5C}
+Down: ${downspeed wlan0} kb/s ${alignr}${downspeedgraph wlan0 8,60 789E2D A7CC5C}
+Upload: ${alignr}${totalup wlan0}
+Download: ${alignr}${totaldown wlan0}${else}${if_existing /proc/net/route eth0}${font sans:bold}Wired${font}
+Up: ${upspeed eth0} kb/s ${alignr}${upspeedgraph eth0 8,60 789E2D A7CC5C}
+Down: ${downspeed eth0} kb/s ${alignr}${downspeedgraph eth0 8,60 789E2D A7CC5C}
+Upload: ${alignr}${totalup eth0}
+Download: ${alignr}${totaldown eth0}${endif}${else}${font PizzaDude Bullets:size=14}4${font}   Network Unavailable${endif}
